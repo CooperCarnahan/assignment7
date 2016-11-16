@@ -1,3 +1,8 @@
+/*Carnahan, Cooper
+cec4256
+16295
+EE312 - Assignment7
+*/
 #include <stdio.h>
 
 int global1 = 0;
@@ -120,14 +125,23 @@ int isPalindrome(char str[]) {
 
 }
 
+void strClear(char str[]) {
+	int len = strlen(str);
+	for (int i = 0; i <= len; i++) {
+		str[i] = '\0';
+	}
+}
 
 void mengshi(char str[], int position) {
 	static int start = 0;
 	static int spaces = 0;
 	char* temp1 = calloc(strlen(str)+1, sizeof(char));
 	char* temp2 = calloc(strlen(str)+1, sizeof(char));
-	int index = 1;
+	int index = position;
 	for (int divider = 1; divider <= strlen(str); divider++) {
+		strClear(temp1);
+		strClear(temp2);
+		position = index;
 		for (int i = 0; i < divider; i++) {
 			temp1[i] = str[i];
 		}
@@ -137,19 +151,20 @@ void mengshi(char str[], int position) {
 		if (isPalindrome(temp1)) {
 			strcpy(pal+position, temp1);
 			position+=strlen(temp1);
-			strcpy(pal + position, "\n");
+			strcpy(pal + position, " ");
 			position++;
 			if (strlen(temp2) == 0) {
-				printf("%s", pal);
+				printf("%s\n", pal);
 			}
-			free(temp1);
-			free(temp2);
 			//printf("%s\n", temp1);
 			mengshi(temp2, position);
 		}
+
 	}
+	free(temp1);
+	free(temp2);
 }
-void experiment(char str[], int divider) {
+/*void experiment(char str[], int divider) {
 	char* copy = calloc(strlen(str) + 1, sizeof(char));
 	char* temp = calloc(strlen(str)+1 , sizeof(char));
 	char* token = calloc(strlen(str) + 1, sizeof(char));
@@ -172,10 +187,10 @@ void experiment(char str[], int divider) {
 	}
 	free(temp);
 	free(token);
-}
+}*/
 
 
-void adjacentPal(char str[]) {
+/*void adjacentPal(char str[]) {
 	int len = strlen(str);
 	char tempstr[4] = { 0 };
 	for (int i = 1; i < len; i++) {
@@ -187,7 +202,7 @@ void adjacentPal(char str[]) {
 			i += 2;
 		}
 	}
-}
+}*/
 
 void generateAllPalindromicDecompositions(char str[]) {
 	/*original = calloc(strlen(str) + 1, sizeof(char));
